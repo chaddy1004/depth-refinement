@@ -362,7 +362,7 @@ class FeatureExtractor(Model):
         return [upsample_2, upsample_1]
 
 
-def load_models(weight_dir=None):
+def load_models():
     fe = FeatureExtractor()
     classifier = Classifier(filter_channels=[fe.out_ch, 512, 256, 128, fe.max_disp])
     regressor = Regressor(filter_channels=[fe.out_ch + 1, 128, 64, 1])
@@ -371,19 +371,17 @@ def load_models(weight_dir=None):
     regressor.build(input_shape=(None, 256, 368, 64 + 32 + 1))
     fe.build(input_shape=(None, 512, 736, 4))
 
-    if weight_dir is not None:
-        weight_dir_all = os.path.join(weight_dir, "*")
-        weight_paths = glob(weight_dir_all)
 
-        for weight_path in weight_paths:
-            if "fe" in weight_path:
-                fe.load_weights(weight_path)
-            elif "classifier" in weight_path:
-                classifier.load_weights(weight_path)
-            elif "regressor" in weight_path:
-                regressor.load_weights(weight_path)
-            else:
-                raise ValueError("WEight path name is not either fe, classifier, or regressor")
+    weight_paths = ["weights/classifier", "weights/regressor", "weights/fe"]
+    for weight_path in weight_paths:
+        if "fe" in weight_path:
+            fe.load_weights(weight_path)
+        elif "classifier" in weight_path:
+            classifier.load_weights(weight_path)
+        elif "regressor" in weight_path:
+            regressor.load_weights(weight_path)
+        else:
+            raise ValueError("WEight path name is not either fe, classifier, or regressor")
 
     return fe, classifier, regressor
 

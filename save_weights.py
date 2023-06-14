@@ -19,7 +19,7 @@ def save():
     classifier.save_weights("weights/classifier")
     regressor.save_weights("weights/regressor")
 
-    fe, classifier, regressor = load_models(weight_dir="weights")
+    fe, classifier, regressor = load_models()
 
     # refiner = Refiner(config=None, backbone=fe, classifier=classifier, regressor=regressor, height=height, width=width)
 

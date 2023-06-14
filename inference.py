@@ -66,7 +66,7 @@ def test(image_path, disp_path, max_disp=256):
     rgb = img_loader(image_path)
     height, width = rgb.shape[:2]
 
-    fe, classifier, regressor = load_models(weight_dir="weights")
+    fe, classifier, regressor = load_models()
 
     refiner = Refiner(config=None, backbone=fe, classifier=classifier, regressor=regressor, height=height, width=width)
 
