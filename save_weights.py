@@ -15,9 +15,9 @@ import math
 def save():
     fe, classifier, regressor = load_model_from_torch(weight_path="utils/net_latest.pt")
 
-    fe.save_weights("weights/fe/fe")
-    classifier.save_weights("weights/classifier/classifier")
-    regressor.save_weights("weights/regressor/regressor")
+    fe.save_weights("weights/fe")
+    classifier.save_weights("weights/classifier")
+    regressor.save_weights("weights/regressor")
 
     fe, classifier, regressor = load_models(weight_dir="weights")
 

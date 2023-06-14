@@ -2,7 +2,7 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-from utils.model_utils import load_model
+from utils.model_utils import load_models
 from utils.img_utils import img_loader, disp_loader, pad_img, numpy_split_like_torch
 
 import tensorflow as tf
@@ -66,7 +66,7 @@ def test(image_path, disp_path, max_disp=256):
     rgb = img_loader(image_path)
     height, width = rgb.shape[:2]
 
-    fe, classifier, regressor = load_model(weight_path="utils/net_latest.pt")
+    fe, classifier, regressor = load_models(weight_dir="weights")
 
     refiner = Refiner(config=None, backbone=fe, classifier=classifier, regressor=regressor, height=height, width=width)
 
